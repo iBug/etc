@@ -1,11 +1,12 @@
 " File: $HOME/.vimrc
 " Made by iBug
-" 00:00, Apr 4, 2018
+" 00:00, Jun 28, 2018
 " Minimal Vim RC file
 " Vim 8.0
 
 set nocompatible
-set showcmd nonumber ruler background=dark
+set timeoutlen=500
+set showcmd number ruler background=dark
 set noshowmatch
 set autoindent smartindent
 set tabstop=4 shiftwidth=4 softtabstop=4 smarttab expandtab
@@ -30,8 +31,7 @@ filetype indent on
 filetype plugin on
 filetype plugin indent on
 
-autocmd FileType c,h,cpp,python,ruby,sh,javascript,html,css,scss,php,make,vim set number
-autocmd FileType sh,javascript,ruby,perl,html,css,scss,yaml set tabstop=2 shiftwidth=2 softtabstop=2 smarttab
+autocmd FileType sh,javascript,html,css,scss,yaml,ruby,vb set tabstop=2 shiftwidth=2 softtabstop=2
 autocmd FileType html,css,scss set noexpandtab
 autocmd FileType c,cpp map <F9> <Esc>:w<CR>:call GccCompile()<CR>
 autocmd FileType c,cpp map <F10> <Esc>:w<CR>:call RunProgram()<CR>
@@ -40,27 +40,27 @@ autocmd FileType sh,python map <F11> <Esc>:w<CR>:call RunScript()<CR>
 autocmd BufNewFile *.[ch],*.[ch]pp exec ":call CAddFileInfo()"
 
 func! CAddFileInfo()
-	call setline(1, "// File: ".expand("%:t"))
-	call append(line("."), "// Author: iBug")
-	call append(line(".")+1, "")
-	normal G
+    call setline(1, "// File: ".expand("%:t"))
+    call append(line("."), "// Author: iBug")
+    call append(line(".")+1, "")
+    normal G
 endfunc
 
 func! GccCompile()
-	exec "w"
-	if &filetype == "c"
-		exec "silent !echo \"gcc % -o %< -O3 -s\""
-		exec "!gcc % -o %< -O3 -s"
-	elseif &filetype == "cpp"
-		exec "silent !echo \"g++ % -o %< -O3 -s\""
-		exec "!g++ % -o %< -O3 -s"
-	endif
+    exec "w"
+    if &filetype == "c"
+        exec "silent !echo \"gcc % -o %< -O3 -s\""
+        exec "!gcc % -o %< -O3 -s"
+    elseif &filetype == "cpp"
+        exec "silent !echo \"g++ % -o %< -O3 -s\""
+        exec "!g++ % -o %< -O3 -s"
+    endif
 endfunc
 
 func! RunProgram()
-	exec "! ./%<"
+    exec "! ./%<"
 endfunc
 
 func! RunScript()
-	exec "! ./%"
+    exec "! ./%"
 endfunc
