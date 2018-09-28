@@ -43,17 +43,18 @@ alias chcon='/system/bin/chcon'
 umask 0022
 
 export EDITOR=vim GPG_TTY=$(tty)
-export GIT_PAGER="less -FR" LESS=""
+export GIT_PAGER="less -FR" LESS="-R"
 
 # SELinux Context (for convenience)
 export SECON=u:object_r:app_data_file:s0:c512,c768
 
-shopt -s direxpand
-
 # Start OpenSSH daemon
-#if ! (ps -e | grep -q 'sshd'); then
-#  sshd
-#fi
+if ! (ps -e | grep -q 'sshd'); then
+  #sshd
+  :
+fi
+
+shopt -s direxpand
 
 # eval $(thefuck --alias)
 
