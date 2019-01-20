@@ -31,7 +31,7 @@ filetype indent on
 filetype plugin on
 filetype plugin indent on
 
-autocmd FileType sh,javascript,html,css,scss,yaml,ruby,vb set tabstop=2 shiftwidth=2 softtabstop=2
+autocmd FileType sh,javascript,html,css,scss,yaml,ruby,vb,sql set tabstop=2 shiftwidth=2 softtabstop=2
 autocmd FileType html,css,scss,text set noexpandtab
 autocmd FileType c,cpp map <F9> <Esc>:w<CR>:call GccCompile()<CR>
 autocmd FileType c,cpp map <F10> <Esc>:w<CR>:call RunProgram()<CR>
