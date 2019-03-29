@@ -1,6 +1,6 @@
 " File: $HOME/.vimrc
 " Made by iBug
-" 00:00, Jun 28, 2018
+" 00:00, Mar 29, 2019
 " Minimal Vim RC file
 " Vim 8.0
 
@@ -23,8 +23,16 @@ syntax on
 cmap <C-A> ggVGY
 map <C-S> :w<CR>
 imap <C-S> <Esc>:w<CR>a
-map <C-W> :q<CR>
-imap <C-W> <Esc>:q<CR>
+"map <C-W> :q<CR>
+"imap <C-W> <Esc>:q<CR>
+map <C-h> <C-W>h
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-l> <C-W>l
+map <C-Left> <C-W>h
+map <C-Down> <C-W>j
+map <C-Up> <C-W>k
+map <C-Right> <C-W>l
 
 filetype on
 filetype indent on
@@ -32,12 +40,13 @@ filetype plugin on
 filetype plugin indent on
 
 autocmd FileType sh,javascript,html,css,scss,yaml,ruby,vb,sql set tabstop=2 shiftwidth=2 softtabstop=2
-autocmd FileType html,css,scss,text set noexpandtab
+autocmd FileType html,htmldjango,css,scss,text set noexpandtab
 autocmd FileType c,cpp map <F9> <Esc>:w<CR>:call GccCompile()<CR>
 autocmd FileType c,cpp map <F10> <Esc>:w<CR>:call RunProgram()<CR>
 autocmd FileType c,cpp map <F11> <Esc>:w<CR>:call GccCompile()<CR>:call RunProgram()<CR>
 autocmd FileType sh,python map <F11> <Esc>:w<CR>:call RunScript()<CR>
 autocmd BufNewFile *.[ch],*.[ch]pp exec ":call CAddFileInfo()"
+autocmd BufNewFile,BufRead *.html set filetype=htmldjango
 
 func! CAddFileInfo()
     call setline(1, "// File: ".expand("%:t"))
