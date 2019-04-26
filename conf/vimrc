@@ -57,12 +57,15 @@ endfunc
 
 func! GccCompile()
     exec "w"
-    if &filetype == "c"
-        exec "silent !echo \"gcc % -o %< -O3 -s\""
-        exec "!gcc % -o %< -O3 -s"
+    if filereadable("Makefile")
+        exec "silent !echo 'make'"
+        exec "!make"
+    elseif &filetype == "c"
+        exec "silent !echo \"gcc % -o %< -O2 -s\""
+        exec "!gcc % -o %< -O2 -s"
     elseif &filetype == "cpp"
-        exec "silent !echo \"g++ % -o %< -O3 -s\""
-        exec "!g++ % -o %< -O3 -s"
+        exec "silent !echo \"g++ % -o %< -O2 -s\""
+        exec "!g++ % -o %< -O2 -s"
     endif
 endfunc
 
