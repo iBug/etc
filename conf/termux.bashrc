@@ -6,6 +6,8 @@ PS1_PROMPT() {
 	return $e
 }
 PS1='$(PS1_PROMPT)\w \$ '
+CDPATH=:$HOME:$PREFIX
+export HISTCONTROL=ignoredups
 
 alias ls='ls --color=auto'
 alias l='ls -C'
@@ -46,7 +48,7 @@ export EDITOR=vim GPG_TTY=$(tty)
 export GIT_PAGER="less -FR" LESS="-R"
 
 # SELinux Context (for convenience)
-export SECON=u:object_r:app_data_file:s0:c512,c768
+export SECON="u:object_r:app_data_file:s0:c512,c768"
 
 # Start OpenSSH daemon
 if ! (ps -e | grep -q 'sshd'); then
