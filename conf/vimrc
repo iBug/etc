@@ -1,17 +1,18 @@
 " File: $HOME/.vimrc
 " Made by iBug
-" 00:00, Mar 29, 2019
+" May 12, 2019
 " Minimal Vim RC file
 " Vim 8.0
 
 set nocompatible
-set timeoutlen=500
+set timeoutlen=200
 set showcmd number ruler background=dark
 set noshowmatch
 set autoindent smartindent
 set tabstop=4 shiftwidth=4 softtabstop=4 smarttab expandtab
 set wrapscan ignorecase incsearch hlsearch
 set whichwrap+=<,>,[,]
+set formatoptions-=cro
 set backspace=2 laststatus=2
 set foldenable foldmethod=manual
 set noautoread nobackup noswapfile confirm
@@ -20,7 +21,6 @@ set magic iskeyword+=_
 set mouse=a selection=exclusive selectmode=mouse,key
 syntax on
 
-cmap <C-A> ggVGY
 map <C-S> :w<CR>
 imap <C-S> <Esc>:w<CR>a
 "map <C-W> :q<CR>
@@ -40,7 +40,7 @@ filetype plugin on
 filetype plugin indent on
 
 autocmd FileType sh,javascript,html,css,scss,yaml,ruby,vb,sql set tabstop=2 shiftwidth=2 softtabstop=2
-autocmd FileType html,htmldjango,css,scss,text set noexpandtab
+autocmd FileType html,htmldjango,css,scss,make,text set noexpandtab
 autocmd FileType c,cpp map <F9> <Esc>:w<CR>:call GccCompile()<CR>
 autocmd FileType c,cpp map <F10> <Esc>:w<CR>:call RunProgram()<CR>
 autocmd FileType c,cpp map <F11> <Esc>:w<CR>:call GccCompile()<CR>:call RunProgram()<CR>
