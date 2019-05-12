@@ -132,9 +132,11 @@ umask 0022
 if [[ -z "$TMUX" ]]; then
   if [[ "$SSH_CONNECTION" != "" ]]; then
     export TMUX_SESSION=ssh
-    tmux attach-session -t "$TMUX_SESSION" 2>/dev/null || tmux new-session -s "$TMUX_SESSION"
+    tmux new-session -A -s "$TMUX_SESSION"
   else
     export TMUX_SESSION=work
-    tmux attach-session -t "$TMUX_SESSION" 2>/dev/null || tmux new-session -s "$TMUX_SESSION" && exit
+    exec tmux new-session -A -s "$TMUX_SESSION"
   fi
 fi
+
+CDPATH=:$HOME:/etc:/usr
