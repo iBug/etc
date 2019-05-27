@@ -1,11 +1,11 @@
 " File: $HOME/.vimrc
 " Made by iBug
-" May 12, 2019
-" Minimal Vim RC file
-" Vim 8.0
+" May 26, 2019
+" iBug's Vim RC file
+" Vim 8.1
 
 set nocompatible
-set timeoutlen=200
+set timeoutlen=500 ttimeoutlen=50
 set showcmd number ruler background=dark
 set noshowmatch
 set autoindent smartindent
@@ -21,10 +21,17 @@ set magic iskeyword+=_
 set mouse=a selection=exclusive selectmode=mouse,key
 syntax on
 
+let mapleader=" "
+map <Leader> <NOP>
+noremap <Leader><Left> <C-W>h
+noremap <Leader><Down> <C-W>j
+noremap <Leader><Up> <C-W>k
+noremap <Leader><Right> <C-W>l
+
+map q <NOP>
+map <C-Z> <C-X>
 map <C-S> :w<CR>
 imap <C-S> <Esc>:w<CR>a
-"map <C-W> :q<CR>
-"imap <C-W> <Esc>:q<CR>
 map <C-h> <C-W>h
 map <C-j> <C-W>j
 map <C-k> <C-W>k
@@ -48,6 +55,7 @@ autocmd FileType c,cpp map <F11> <Esc>:w<CR>:call GccCompile()<CR>:call RunProgr
 autocmd FileType sh,python map <F11> <Esc>:w<CR>:call RunScript()<CR>
 autocmd BufNewFile *.[ch],*.[ch]pp exec ":call CAddFileInfo()"
 autocmd BufNewFile,BufRead *.html set filetype=htmldjango
+autocmd BufWritePre * :%s/^\s\+$//e " Only trim empty lines
 
 func! CAddFileInfo()
     call setline(1, "// File: ".expand("%:t"))
