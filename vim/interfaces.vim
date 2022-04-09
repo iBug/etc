@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language:	interfaces (/etc/network/interfaces)
-" Maintaner:	iBug <i@ibugone.com>
+" Maintainer:	iBug <i@ibugone.com>
 " Version:	0.1
 " Released under the terms of the GNU/GPL licence v2
 "
