@@ -42,7 +42,7 @@ umask 0022
 export PATH=$HOME/.local/bin:$PATH
 export EDITOR=vim
 export GPG_TTY="$(tty)"
-export LESS="-iR" GIT_PAGER="less -FR"
+export LESS="-iR"
 
 # SELinux Context (for convenience)
 SECON="u:object_r:app_data_file:s0:c512,c768"

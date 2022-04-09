@@ -73,7 +73,7 @@ CDPATH=":~"
 
 export LESS="-iR --mouse --wheel-lines=3"
 export SYSTEMD_LESS="-iFR"
-export PAGER="less $LESS" GIT_PAGER="less -F $LESS"
+export PAGER="less $LESS"
 export GPG_TTY="$(tty)"
 
 # colored GCC warnings and errors

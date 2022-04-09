@@ -1,7 +1,6 @@
 [user]
     name = iBug
     email = git@ibugone.com
-    signingkey = A2C63304
 [core]
     excludesfile = ~/.cvsignore
 [init]
