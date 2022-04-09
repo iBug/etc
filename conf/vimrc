@@ -1,8 +1,8 @@
 " File: $HOME/.vimrc
-" Made by iBug
-" Mar 22, 2021
-" iBug's Vim RC file
-" Vim 8.1
+" Author: iBug
+" Date: Apr 2, 2022
+" Description: iBug's Vim RC file
+" Vim: 8.2
 
 set nocompatible
 set timeoutlen=500 ttimeoutlen=50
@@ -19,35 +19,29 @@ set linebreak
 set magic iskeyword+=_
 set mouse=a selection=exclusive selectmode=mouse,key
 set autoread
-syntax on
 
 map q <NOP>
 map Q <NOP>
 map <M-v> <C-v>
 let mapleader="!"
 
-let mapleader=" "
-map <Leader> <NOP>
-noremap <Leader><Left> <C-W>h
-noremap <Leader><Down> <C-W>j
-noremap <Leader><Up> <C-W>k
-noremap <Leader><Right> <C-W>l
-
-filetype on
-filetype indent on
-filetype plugin on
-filetype plugin indent on
-
-autocmd FileType sh,javascript,html,htmldjango,liquid,css,scss,yaml,ruby,vb,sql,pug,vue set tabstop=2 shiftwidth=2 softtabstop=2
+autocmd FileType sh,javascript,html,htmldjango,liquid,css,scss,yaml,ruby,vb,sql,sshconfig,vue set tabstop=2 shiftwidth=2 softtabstop=2
 autocmd FileType html,htmldjango,go,make,text set noexpandtab
 autocmd FileType css,sass,scss,liquid set expandtab
-autocmd FileType markdown set shiftwidth=2
 autocmd FileType markdown,liquid syntax sync minlines=9999
 autocmd FileType asm set tabstop=8 shiftwidth=8 softtabstop=8 noexpandtab
 autocmd FileType * set formatoptions-=cro formatoptions+=m
-autocmd BufWritePre * :%s/^\s\+$//e " Only trim empty lines
+autocmd BufWritePre * :%s/^\s\+$//e "Only trim empty lines
 
-:nnoremap <F5> "=strftime("%Y-%m-%dT%H:%M:%S%z")<CR>p
-:inoremap <F5> <C-R>=strftime("%Y-%m-%dT%H:%M:%S%z")<CR>
+syntax on
+filetype plugin indent on
 
-set runtimepath+=~/proj/tabnine-vim
+autocmd BufWritePost *.go :call GoFmt()
+function GoFmt()
+  if executable("goimports")
+    silent !goimports -w % >/dev/null 2>&1
+  elseif executable("gofmt")
+    silent !gofmt -w % >/dev/null 2>&1
+  endif
+  e!
+endfunction
