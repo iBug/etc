@@ -1,17 +1,24 @@
 #!/data/data/com.termux/files/usr/bin/sh
 
-PS1_PROMPT() {
+PROMPT_COMMAND() {
 	local e=$?
-	(( e )) && echo -n "$e|"
+  PROMPT_ECODE=""
+	(( e )) && PROMPT_ECODE="$e|"
 	return $e
 }
-PS1='$(PS1_PROMPT)\w \$ '
+PROMPT_COMMAND=PROMPT_COMMAND
+PS1='${PROMPT_ECODE}\w \$ '
 shopt -s direxpand
 
+PROMPT_DIRTRIM=2
+HISTCONTROL=ignoreboth
+shopt -s histappend
+CDPATH=":~"
+
 alias ls='ls --color=auto'
-alias l='ls -C'
+alias l='ls -CF'
 alias la='ls -A'
-alias ll='ls -al'
+alias ll='ls -alF'
 alias ..='cd ..;'
 
 alias r='fc -e -'
@@ -19,13 +26,12 @@ alias x='exit'
 alias grep='grep --color=auto'
 
 alias cc='cc -pie'
-alias cpp='cpp -pie'
 alias c++='c++ -pie'
 alias gcc='gcc -pie'
 alias g++='g++ -pie'
 
-alias tb='toolbox '
-alias ty='toybox '
+alias tb='/system/bin/toolbox '
+alias ty='/system/bin/toybox '
 alias sudo='sudo '
 alias su='tsu'
 
@@ -34,15 +40,14 @@ alias chcon='/system/bin/chcon'
 umask 0022
 
 export PATH=$HOME/.local/bin:$PATH
-export HISTCONTROL=ignoredups
-export CDPATH=:$HOME
-export EDITOR=vim GPG_TTY=$(tty)
-export GIT_PAGER="less -FR" LESS="-R"
+export EDITOR=vim
+export GPG_TTY="$(tty)"
+export LESS="-iR" GIT_PAGER="less -FR"
 
 # SELinux Context (for convenience)
-export SECON="u:object_r:app_data_file:s0:c512,c768"
+SECON="u:object_r:app_data_file:s0:c512,c768"
 
-if [[ -z "$TMUX" ]] && [[ -n "$SSH_CONNECTION" ]]; then
+if test -z "$TMUX" && test -n "$SSH_CONNECTION"; then
   export TMUX_SESSION=ssh
   tmux attach -t "$TMUX_SESSION" 2>/dev/null || tmux new-session -s "$TMUX_SESSION"
 fi
