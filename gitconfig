@@ -2,7 +2,8 @@
     name = iBug
     email = git@ibugone.com
 [core]
-    excludesfile = ~/.cvsignore
+    excludesFile = ~/.cvsignore
+    pager = less -F
 [init]
     defaultBranch = master
 [color]
@@ -25,7 +26,7 @@
     A = add -A
     c = commit
     d = diff
-    l = log
+    l = log --graph --oneline --decorate --all
     ch = checkout
 #[url "git@github.com:"]
 #    insteadOf = https://github.com/
