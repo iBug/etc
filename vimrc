@@ -23,7 +23,7 @@ set autoread nocursorline nocursorcolumn
 syntax on
 filetype plugin indent on
 
-if isdirectory("~/.vim/bundle/Vundle.vim")
+if isdirectory(expand('~/.vim/bundle/Vundle.vim', ':p'))
   filetype off
   set runtimepath+=~/.vim/bundle/Vundle.vim
   call vundle#begin()
