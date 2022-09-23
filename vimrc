@@ -5,6 +5,7 @@
 " Vim 8.2
 
 set nocompatible
+set viminfo='100,<100,s32,h
 set timeoutlen=500 ttimeoutlen=50
 set showcmd number ruler showmatch
 set background=dark termguicolors
@@ -23,14 +24,20 @@ set autoread nocursorline nocursorcolumn
 syntax on
 filetype plugin indent on
 
+" if has("termguicolors")
+"   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+"   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+" endif
+
 if isdirectory(expand('~/.vim/bundle/Vundle.vim', ':p'))
   filetype off
   set runtimepath+=~/.vim/bundle/Vundle.vim
   call vundle#begin()
+  let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
+  let g:ycm_clangd_binary_path='/usr/bin/clangd'
   Plugin 'tabnine/YouCompleteMe'
   call vundle#end()
   filetype plugin indent on
-  let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
   set completeopt-=preview
 endif
 
@@ -39,7 +46,7 @@ map Q <NOP>
 map <M-v> <C-v>
 let mapleader="!"
 
-autocmd FileType sh,javascript,json,toml,html,htmldjango,liquid,css,scss,yaml,ruby,vb,sql,sshconfig,pug,vue set tabstop=2 shiftwidth=2 softtabstop=2
+autocmd FileType sh,bash,javascript,json,toml,html,htmldjango,liquid,css,scss,yaml,ruby,vb,sql,sshconfig,pug,vue set tabstop=2 shiftwidth=2 softtabstop=2
 autocmd FileType html,htmldjango,go,make,text set noexpandtab
 autocmd FileType css,sass,scss,liquid set expandtab
 autocmd FileType markdown,liquid syntax sync minlines=9999
