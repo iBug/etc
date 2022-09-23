@@ -11,7 +11,6 @@ esac
 
 umask 0022
 test -x /usr/bin/stty && stty -ixon # disable Ctrl-S freezing
-bind "set show-all-if-ambiguous on" # from .inputrc
 
 HISTSIZE=20000
 HISTFILESIZE=100000
@@ -71,12 +70,20 @@ export LESS="-iR --mouse --wheel-lines=3"
 export SYSTEMD_LESS="-iFR"
 export PAGER="less $LESS"
 export GPG_TTY="$(tty)"
+
+#test -f ~/.Xauthority && export XAUTHORITY=~/.Xauthority
+test -f ~/.bash_aliases && . ~/.bash_aliases
+
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-test -f ~/.bash_aliases && . ~/.bash_aliases
-test -f /etc/bash_completion && . /etc/bash_completion
-#test -f ~/.Xauthority && export XAUTHORITY=~/.Xauthority
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
 
 if [ -n "$SSH_CONNECTION" -a -z "$TMUX" -a "$TERM_PROGRAM" != vscode ]; then
   export TMUX_SESSION=ssh

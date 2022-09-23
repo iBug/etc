@@ -8,6 +8,8 @@
     defaultBranch = master
 [color]
     ui = true
+[advice]
+    detachedHead = false
 [push]
     default = tracking
 [pull]
