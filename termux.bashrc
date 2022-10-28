@@ -1,5 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/sh
 
+umask 0022
+
 PROMPT_COMMAND() {
 	local e=$?
   PROMPT_ECODE=""
@@ -37,7 +39,12 @@ alias su='tsu'
 
 alias chcon='/system/bin/chcon'
 
-umask 0022
+if command -v exa >/dev/null; then
+  alias ls=exa
+  alias la='ls -a'
+  alias ll='ls -aalF'
+  alias l='ls -GF'
+fi
 
 export PATH=$HOME/.local/bin:$PATH
 export EDITOR=vim

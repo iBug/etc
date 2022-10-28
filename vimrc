@@ -54,6 +54,8 @@ autocmd FileType asm set tabstop=8 shiftwidth=8 softtabstop=8 noexpandtab
 autocmd FileType * set formatoptions-=cro formatoptions+=m
 autocmd BufWritePre * :%s/^\s\+$//e " Only trim empty lines
 
+let g:pyindent_open_paren=shiftwidth()
+
 autocmd BufWritePost *.go :call GoFmt()
 function GoFmt()
   if executable("goimports")
