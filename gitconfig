@@ -21,14 +21,16 @@
 [gpg]
     program = gpg2
 [alias]
-    p = push
-    pu = pull
-    s = status
     a = add
     A = add -A
     c = commit
+    ch = checkout
     d = diff
     l = log --graph --oneline --decorate --all
-    ch = checkout
+    p = push
+    pu = pull
+    s = status
+
+    root = rev-parse --show-toplevel
 #[url "git@github.com:"]
 #    insteadOf = https://github.com/
