@@ -1,16 +1,14 @@
 # vim:filetype=bash:
 
 # If not running interactively, don't do anything
-case $- in
-  *i*) ;;
-  *) return;;
-esac
+[[ $- == *i* ]] || return
 
 umask 0022
-test -x /usr/bin/stty && stty -ixon # disable Ctrl-S freezing
+test -x /usr/bin/stty && stty -ixon  # disable Ctrl-S freezing
 
 HISTSIZE=20000
 HISTFILESIZE=100000
+HISTTIMEFORMAT="%F %T "
 HISTCONTROL=ignoreboth
 shopt -s histappend
 
@@ -43,6 +41,8 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias diff='diff --color=auto'
 alias ip='ip -c=auto' # iproute2
+bind 'TAB: menu-complete'
+bind '"\e[Z": menu-complete-backward'
 
 alias ll='ls -alF'
 alias la='ls -A'
@@ -62,11 +62,15 @@ fi
 
 export LESS="-iR --mouse --wheel-lines=3"
 export SYSTEMD_LESS="-iFR"
-export PAGER="less $LESS"
+export PAGER=less
 export GPG_TTY="$(tty)"
 
 test -f ~/.bash_aliases && . ~/.bash_aliases
 #test -f ~/.Xauthority && export XAUTHORITY=~/.Xauthority
+
+tm() {
+  tmux new-session -A -s "${1:-$TMUX_SESSION}"
+}
 
 if [ -n "$SSH_CONNECTION" -a -z "$TMUX" -a "$TERM_PROGRAM" != vscode ]; then
   export TMUX_SESSION=ssh
