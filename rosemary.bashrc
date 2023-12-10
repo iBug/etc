@@ -23,8 +23,7 @@ else
   PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
 
-_only_1=([1]=1)
-PS1='${_only_1[$((! ! $?))]:+$?|}'"$PS1"
+PS1='${BASH[((! $?))]:+$?|}'"$PS1"
 
 if [ -x /usr/bin/dircolors ]; then
   test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
