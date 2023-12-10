@@ -23,14 +23,8 @@ else
   PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
 
-PROMPT_COMMAND() {
-  local e=$?
-  PROMPT_ECODE=""
-  (( e )) && PROMPT_ECODE="$e|"
-  return $e
-}
-PROMPT_COMMAND=PROMPT_COMMAND
-PS1='${PROMPT_ECODE}'"$PS1"
+_only_1=([1]=1)
+PS1='${_only_1[$((! ! $?))]:+$?|}'"$PS1"
 
 if [ -x /usr/bin/dircolors ]; then
   test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -53,7 +47,12 @@ alias vi=vim
 export EDITOR=vim
 CDPATH=":~"
 
-if command -v exa >/dev/null; then
+if command -v eza >/dev/null; then
+  alias ls=eza
+  alias la='ls -a'
+  alias ll='ls -aalF'
+  alias l='ls -GF'
+elif command -v exa >/dev/null; then
   alias ls=exa
   alias la='ls -a'
   alias ll='ls -aalF'
