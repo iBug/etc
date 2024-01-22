@@ -21,7 +21,7 @@ set formatoptions-=cro
 set autoread nobackup noswapfile confirm
 set linebreak
 set magic iskeyword+=_
-set mouse=a selection=exclusive selectmode=mouse,key
+set mouse=a ttymouse=sgr selection=exclusive selectmode=mouse,key
 set nocursorline nocursorcolumn
 syntax on
 filetype plugin indent on
